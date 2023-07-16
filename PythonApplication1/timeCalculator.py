@@ -2,7 +2,7 @@ def add_time(start, duration , day = 0):
     new_time = ""
     minuteList = minutes(start, duration)
     hourDaysList = hourDaysCalc(start,duration)
-    if day != 0 : 
+    if day != 0 : #this series of if statements builds the new_time string. Should probably be case or switch statemnt but oh well. 
         weekDay = dayOfWeek(start, duration, day)
         if hourDaysList[1] == 0 :
             new_time = str(hourDaysList[0]) + ":" + str(minuteList[0]) + " " + str(hourDaysList[2]) + ", " + weekDay
@@ -20,7 +20,7 @@ def add_time(start, duration , day = 0):
 
     return new_time
 
-def dataCleaner (start, duration) :
+def dataCleaner (start, duration) : #this function splits the function arguements so they are easier to work with
      
      startSplit = start.split(":")
      startHour = startSplit[0]
@@ -35,7 +35,7 @@ def dataCleaner (start, duration) :
      cleanedData = list((startMinutes, startHour, startHalf, durationMinutes,durationHour))
      return cleanedData
 
-def minutes (start, duration) : 
+def minutes (start, duration) : #this function find the correct minutes and determines if they roll over to add an hour
     minuteHourList = []
     hourNumber = 0
     cleanedData = dataCleaner(start, duration)
@@ -53,7 +53,7 @@ def minutes (start, duration) :
     minuteHourList.append(hourNumber)
     return minuteHourList
 
-def hourDaysCalc(start, duration) :
+def hourDaysCalc(start, duration) : #this function finds the hour and number of days passed
     cleanedData = dataCleaner(start,duration)
     extraHour = minutes(start,duration)
     hourTotal = int(cleanedData[1]) + int(cleanedData[4]) + extraHour[1]
@@ -84,12 +84,7 @@ def hourDaysCalc(start, duration) :
     return hourDays
 
 
-
-def daysLater (start, duration) : 
-    #todo
-    return
-
-def dayOfWeek (start, duration , day) :
+def dayOfWeek (start, duration , day) : #this function finds the correct day of the week to return
     day = day.lower()
     daysOfWeek = ["monday" , "tuesday" , "wednesday" , "thursday" , "friday" , "saturday","sunday"]
     daysOfWeekFormatted = ["Monday" , "Tuesday" , "Wednesday" , "Thursday" , "Friday" , "Saturday","Sunday"]
